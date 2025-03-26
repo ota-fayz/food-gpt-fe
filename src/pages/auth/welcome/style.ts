@@ -15,13 +15,15 @@ export const Container = styled('div')`
 `
 
 export const Wrapper = styled('div')(({theme}) => ({
-	backgroundColor: theme.palette.common.black,
-	color: theme.palette.common.white,
+	backgroundColor: theme.palette.common.white,
+	color: theme.palette.common.black,
 	borderTopLeftRadius: theme.spacing(4),
 	borderTopRightRadius: theme.spacing(4),
 	padding: theme.spacing(6),
 	height: '100%',
 	display: 'flex',
 	flexDirection: 'column',
-	justifyContent: 'space-between'
+	justifyContent: 'space-between',
+	textAlign: 'center',
+	marginTop: theme.spacing(-4)
 }))

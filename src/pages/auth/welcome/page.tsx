@@ -9,16 +9,16 @@ const Welcome = () => {
 		<Container>
 			<img className="img" src={ImageSalad} alt="Salad with macronutrients" />
 			<Wrapper>
-				<Typography variant="h4" align="center">
-					Легкий подсчет калорий с Al
+				<Typography variant="h5" component="h1">
+					Легкий подсчет калорий с AI
 				</Typography>
-				<Typography variant="subtitle1" align="center">
-					Просто сделайте фото своего блюда, а Al сделает все остальное
+				<Typography variant="body1">
+					Просто сделайте фото своего блюда, а AI сделает всё остальное
 				</Typography>
-				<Typography variant="body1" align="center">
+				<Typography variant="body2">
 					Получите персональный план за минуту
 				</Typography>
-				<Button variant="contained">
+				<Button variant="contained" size="large">
 					Начать
 				</Button>
 			</Wrapper>
