@@ -1,13 +1,12 @@
 import { createTheme } from '@mui/material'
 
+const baseTheme = createTheme()
+
 export const theme = createTheme({
-	components: {
-		MuiButton: {
-			styleOverrides: {
-				contained: ({ theme }) => ({
-					backgroundColor: theme.palette.common.black,
-				}),
-			},
-		},
+	palette: {
+		primary: {
+			main: baseTheme.palette.common.black
+		}
 	},
+	components: {}
 })

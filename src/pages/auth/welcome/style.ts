@@ -19,7 +19,7 @@ export const Wrapper = styled('div')(({theme}) => ({
 	color: theme.palette.common.black,
 	borderTopLeftRadius: theme.spacing(4),
 	borderTopRightRadius: theme.spacing(4),
-	padding: theme.spacing(6),
+	padding: theme.spacing(4),
 	height: '100%',
 	display: 'flex',
 	flexDirection: 'column',
