@@ -1,44 +1,44 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { type FormTypes, schema } from './form.schema.ts'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { type ZodType } from 'zod'
+
+import { type FormTypes } from './form.schema'
+import { STEPS } from './constants'
 
 export const usePage = () => {
-	const [progress, setProgress] = useState(0)
+	const [stepIndex, setStepIndex] = useState(0)
 	const navigate = useNavigate()
+	const currentStep = STEPS[stepIndex]
 
-	const {
-		handleSubmit,
-		formState: {isValid},
-		control
-	} = useForm<FormTypes>({
-		resolver: zodResolver(schema),
+	const form = useForm<FormTypes>({
+		resolver: zodResolver(currentStep.schema as ZodType<FormTypes>),
 		mode: 'onChange',
-		defaultValues: {
-			gender: null
-		}
+		defaultValues: currentStep.defaultValues
 	})
 
 	const handleBack = () => {
-		if (progress === 0) {
+		if (stepIndex === 0) {
 			navigate(-1)
 		} else {
-			setProgress(progress - 10)
+			setStepIndex(stepIndex - 1)
 		}
 	}
 
 	const onSubmit = (data: FormTypes) => {
 		console.log('Submitted data:', data)
-		setProgress(progress + 10)
+		setStepIndex(stepIndex + 1)
 	}
 
+	const CurrentStep = STEPS[stepIndex].component
+	const progress = (stepIndex + 1) / STEPS.length * 100
+
 	return {
-		handleBack,
 		progress,
-		isValid,
+		handleBack,
+		form,
 		onSubmit,
-		control,
-		handleSubmit
+		CurrentStep
 	}
 }
