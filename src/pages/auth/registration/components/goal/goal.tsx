@@ -7,7 +7,7 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import Radio from '@mui/material/Radio'
 
 export const Goal = () => {
-	const { control } = useFormContext()
+	const {control} = useFormContext()
 
 	return (
 		<>
@@ -19,26 +19,24 @@ export const Goal = () => {
 					Это поможет создать персональный план для вас.
 				</Typography>
 			</Stack>
-			<Stack>
-				<FormControl>
-					{/* TODO: Make reusable component */}
-					<Controller
-						name="goal"
-						control={control}
-						render={({field}) => (
-							<RadioGroup
-								{...field}
-								aria-labelledby="goal-radio-buttons-group-label"
-								value={field.value ?? null}
-							>
-								<FormControlLabel value="LOSE" control={<Radio />} label="Похудеть" />
-								<FormControlLabel value="MAINTAIN" control={<Radio />} label="Удержать" />
-								<FormControlLabel value="GAIN" control={<Radio />} label="Набрать вес" />
-							</RadioGroup>
-						)}
-					/>
-				</FormControl>
-			</Stack>
+			<FormControl>
+				{/* TODO: Make reusable component */}
+				<Controller
+					name="goal"
+					control={control}
+					render={({field}) => (
+						<RadioGroup
+							{...field}
+							aria-labelledby="goal-radio-buttons-group-label"
+							value={field.value ?? null}
+						>
+							<FormControlLabel value="LOSE" control={<Radio />} label="Похудеть" />
+							<FormControlLabel value="MAINTAIN" control={<Radio />} label="Удержать" />
+							<FormControlLabel value="GAIN" control={<Radio />} label="Набрать вес" />
+						</RadioGroup>
+					)}
+				/>
+			</FormControl>
 		</>
 	)
 }

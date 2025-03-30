@@ -1,11 +1,15 @@
 import { z, type ZodType } from 'zod'
 
-export type GenderFormTypes = {
+type GenderFormTypes = {
 	gender: 'MALE' | 'FEMALE'
 }
 
-export type GoalFormTypes = {
+type GoalFormTypes = {
 	goal: 'LOSE' | 'MAINTAIN' | 'GAIN'
+}
+
+type AgeFormTypes = {
+	age: number
 }
 
 export const genderSchema: ZodType<GenderFormTypes> = z.object({
@@ -16,4 +20,8 @@ export const goalSchema: ZodType<GoalFormTypes> = z.object({
 	goal: z.enum(['LOSE', 'MAINTAIN', 'GAIN'])
 })
 
-export type FormTypes = GenderFormTypes | GoalFormTypes
+export const ageSchema = z.object({
+	age: z.preprocess((val) => Number(val), z.number().min(1).max(999))
+})
+
+export type FormTypes = GenderFormTypes | GoalFormTypes | AgeFormTypes

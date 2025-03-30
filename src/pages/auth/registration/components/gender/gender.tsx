@@ -7,7 +7,7 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import Radio from '@mui/material/Radio'
 
 export const Gender = () => {
-	const { control } = useFormContext()
+	const {control} = useFormContext()
 
 	return (
 		<>
@@ -19,25 +19,23 @@ export const Gender = () => {
 					Это поможет создать персональный план для вас.
 				</Typography>
 			</Stack>
-			<Stack>
-				<FormControl>
-					{/* TODO: Make reusable component */}
-					<Controller
-						name="gender"
-						control={control}
-						render={({field}) => (
-							<RadioGroup
-								{...field}
-								aria-labelledby="gender-radio-buttons-group-label"
-								value={field.value ?? null}
-							>
-								<FormControlLabel value="MALE" control={<Radio />} label="Мужской" />
-								<FormControlLabel value="FEMALE" control={<Radio />} label="Женский" />
-							</RadioGroup>
-						)}
-					/>
-				</FormControl>
-			</Stack>
+			<FormControl>
+				{/* TODO: Make reusable component */}
+				<Controller
+					name="gender"
+					control={control}
+					render={({field}) => (
+						<RadioGroup
+							{...field}
+							aria-labelledby="gender-radio-buttons-group-label"
+							value={field.value ?? null}
+						>
+							<FormControlLabel value="MALE" control={<Radio />} label="Мужской" />
+							<FormControlLabel value="FEMALE" control={<Radio />} label="Женский" />
+						</RadioGroup>
+					)}
+				/>
+			</FormControl>
 		</>
 	)
 }

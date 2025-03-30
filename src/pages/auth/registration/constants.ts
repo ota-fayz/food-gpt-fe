@@ -1,6 +1,7 @@
 import { Gender } from './components/gender'
-import { genderSchema, goalSchema } from './form.schema'
+import { ageSchema, genderSchema, goalSchema } from './form.schema'
 import { Goal } from './components/goal'
+import { Age } from './components/age'
 
 export const STEPS = [
 	{
@@ -13,6 +14,13 @@ export const STEPS = [
 	{
 		component: Goal,
 		schema: goalSchema,
+		defaultValues: {
+			goal: null
+		}
+	},
+	{
+		component: Age,
+		schema: ageSchema,
 		defaultValues: {
 			goal: null
 		}
