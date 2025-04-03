@@ -2,7 +2,7 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import { Link } from 'react-router-dom'
 
-import { Container, Wrapper } from './style.ts'
+import { Container, Wrapper } from './styles'
 import ImageSalad from '../../../assets/images/salad_with_macronutrients.png'
 import { ROUTER } from '../../../constants/router.ts'
 

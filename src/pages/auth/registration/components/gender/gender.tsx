@@ -1,10 +1,13 @@
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
-import FormControl from '@mui/material/FormControl'
-import { Controller, useFormContext } from 'react-hook-form'
-import RadioGroup from '@mui/material/RadioGroup'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Radio from '@mui/material/Radio'
+import { useFormContext } from 'react-hook-form'
+
+import { RadioGroup } from '../../../../../components/radio'
+
+const GENDER_OPTIONS = [
+	{value: 'MALE', label: 'Мужской'},
+	{value: 'FEMALE', label: 'Женский'}
+]
 
 export const Gender = () => {
 	const {control} = useFormContext()
@@ -19,23 +22,11 @@ export const Gender = () => {
 					Это поможет создать персональный план для вас.
 				</Typography>
 			</Stack>
-			<FormControl>
-				{/* TODO: Make reusable component */}
-				<Controller
-					name="gender"
-					control={control}
-					render={({field}) => (
-						<RadioGroup
-							{...field}
-							aria-labelledby="gender-radio-buttons-group-label"
-							value={field.value ?? null}
-						>
-							<FormControlLabel value="MALE" control={<Radio />} label="Мужской" />
-							<FormControlLabel value="FEMALE" control={<Radio />} label="Женский" />
-						</RadioGroup>
-					)}
-				/>
-			</FormControl>
+			<RadioGroup
+				options={GENDER_OPTIONS}
+				control={control}
+				name="gender"
+			/>
 		</>
 	)
 }

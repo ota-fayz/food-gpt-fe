@@ -1,10 +1,14 @@
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
-import FormControl from '@mui/material/FormControl'
-import { Controller, useFormContext } from 'react-hook-form'
-import RadioGroup from '@mui/material/RadioGroup'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Radio from '@mui/material/Radio'
+import { useFormContext } from 'react-hook-form'
+import { RadioGroup } from '../../../../../components/radio'
+
+
+const GOAL_OPTIONS = [
+	{value: 'LOSE', label: 'Похудеть'},
+	{value: 'MAINTAIN', label: 'Удержать'},
+	{value: 'GAIN', label: 'Набрать вес'}
+]
 
 export const Goal = () => {
 	const {control} = useFormContext()
@@ -19,24 +23,11 @@ export const Goal = () => {
 					Это поможет создать персональный план для вас.
 				</Typography>
 			</Stack>
-			<FormControl>
-				{/* TODO: Make reusable component */}
-				<Controller
-					name="goal"
-					control={control}
-					render={({field}) => (
-						<RadioGroup
-							{...field}
-							aria-labelledby="goal-radio-buttons-group-label"
-							value={field.value ?? null}
-						>
-							<FormControlLabel value="LOSE" control={<Radio />} label="Похудеть" />
-							<FormControlLabel value="MAINTAIN" control={<Radio />} label="Удержать" />
-							<FormControlLabel value="GAIN" control={<Radio />} label="Набрать вес" />
-						</RadioGroup>
-					)}
-				/>
-			</FormControl>
+			<RadioGroup
+				control={control}
+				name="goal"
+				options={GOAL_OPTIONS}
+			/>
 		</>
 	)
 }

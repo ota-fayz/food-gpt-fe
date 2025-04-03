@@ -6,7 +6,7 @@ import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 import { FormProvider } from 'react-hook-form'
 
-import { Form, Wrapper } from './style'
+import { Form, Wrapper } from './styles'
 import { usePage } from './usePage'
 
 const Registration = () => {
