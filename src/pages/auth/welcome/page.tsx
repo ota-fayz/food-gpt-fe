@@ -3,7 +3,7 @@ import Button from '@mui/material/Button'
 import { Link } from 'react-router-dom'
 
 import { Container, Wrapper } from './styles'
-import ImageSalad from '../../../assets/images/salad_with_macronutrients.png'
+import ImageSalad from '../../../assets/images/salad-with-macronutrients.png'
 import { ROUTER } from '../../../constants/router.ts'
 
 const Welcome = () => {

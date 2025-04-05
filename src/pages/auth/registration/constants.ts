@@ -1,9 +1,21 @@
 import { Gender } from './components/gender'
-import { ageSchema, genderSchema, goalSchema, heightSchema, weightSchema } from './form.schema'
 import { Goal } from './components/goal'
 import { Age } from './components/age'
 import { Height } from './components/height'
 import { Weight } from './components/weight'
+import { Motivation } from './components/motivation'
+import { TargetWeight } from './components/target-weight'
+import { HasChildren } from './components/has-children'
+import {
+	ageSchema,
+	genderSchema,
+	goalSchema,
+	heightSchema,
+	weightSchema,
+	motivationSchema,
+	targetWeightSchema,
+	hasChildrenSchema
+} from './form.schema'
 
 export const STEPS = [
 	{
@@ -39,6 +51,27 @@ export const STEPS = [
 		schema: weightSchema,
 		defaultValues: {
 			height: null
+		}
+	},
+	{
+		component: Motivation,
+		schema: motivationSchema,
+		defaultValues: {
+			motivation: null
+		}
+	},
+	{
+		component: TargetWeight,
+		schema: targetWeightSchema,
+		defaultValues: {
+			targetWeight: null
+		}
+	},
+	{
+		component: HasChildren,
+		schema: hasChildrenSchema,
+		defaultValues: {
+			hasChildren: null
 		}
 	}
 ]
