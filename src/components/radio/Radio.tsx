@@ -21,8 +21,8 @@ export const RadioGroup = <T extends FieldValues>({
 	} = useController({name, control})
 
 	return (
-		<FormControl component="fieldset" error={!!error}>
-			{label && <FormLabel component="legend">{label}</FormLabel>}
+		<FormControl error={!!error}>
+			{label && <FormLabel>{label}</FormLabel>}
 			<MuiRadioGroup
 				{...props}
 				{...fieldProps}

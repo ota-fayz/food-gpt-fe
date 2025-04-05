@@ -6,6 +6,7 @@ import { type ZodType } from 'zod'
 
 import { type FormTypes } from './form.schema'
 import { STEPS } from './constants'
+import { ROUTER } from '../../../constants/router.ts'
 
 export const usePage = () => {
 	const [stepIndex, setStepIndex] = useState(0)
@@ -28,7 +29,11 @@ export const usePage = () => {
 
 	const onSubmit = (data: FormTypes) => {
 		console.log('Submitted data:', data)
-		setStepIndex(stepIndex + 1)
+		if (stepIndex === STEPS.length - 1) {
+			navigate(ROUTER.DASHBOARD)
+		} else {
+			setStepIndex(stepIndex + 1)
+		}
 	}
 
 	const CurrentStep = STEPS[stepIndex].component

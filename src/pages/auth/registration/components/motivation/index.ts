@@ -1,1 +1,1 @@
-export { Motivation } from './motivation.tsx'
+export { Motivation } from './Motivation'

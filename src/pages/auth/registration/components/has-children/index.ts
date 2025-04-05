@@ -1,1 +1,1 @@
-export { HasChildren } from './hasChildren.tsx'
+export { HasChildren } from './HasChildren'

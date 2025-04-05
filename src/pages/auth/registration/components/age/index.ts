@@ -1,1 +1,1 @@
-export { Age } from './age'
+export { Age } from './Age'

@@ -1,1 +1,1 @@
-export { Gender } from './gender'
+export { Gender } from './Gender'

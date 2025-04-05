@@ -1,1 +1,1 @@
-export { TargetWeight } from './targetWeight.tsx'
+export { TargetWeight } from './TargetWeight'

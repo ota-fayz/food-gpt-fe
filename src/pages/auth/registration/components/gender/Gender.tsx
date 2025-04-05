@@ -15,7 +15,7 @@ export const Gender = () => {
 	return (
 		<>
 			<Stack spacing={1}>
-				<Typography variant="h5" component="h1" id="gender-radio-buttons-group-label">
+				<Typography variant="h5" component="h1">
 					Выберите ваш пол
 				</Typography>
 				<Typography variant="body2" color="text.secondary">

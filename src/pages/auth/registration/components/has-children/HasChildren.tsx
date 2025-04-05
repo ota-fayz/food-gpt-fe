@@ -14,7 +14,7 @@ export const HasChildren = () => {
 	return (
 		<>
 			<Stack spacing={1}>
-				<Typography variant="h5" component="h1" id="goal-radio-buttons-group-label">
+				<Typography variant="h5" component="h1">
 					У вас есть дети?
 				</Typography>
 				<Typography variant="body2" color="text.secondary">

@@ -1,1 +1,1 @@
-export { Weight } from './weight'
+export { Weight } from './Weight'

@@ -16,7 +16,7 @@ export const Motivation = () => {
 	return (
 		<>
 			<Stack spacing={1}>
-				<Typography variant="h5" component="h1" id="goal-radio-buttons-group-label">
+				<Typography variant="h5" component="h1">
 					Чего вы хотите достичь?
 				</Typography>
 				<Typography variant="body2" color="text.secondary">
