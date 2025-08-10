@@ -9,15 +9,15 @@ export const goalSchema = z.object({
 })
 
 export const ageSchema = z.object({
-	age: z.preprocess(val => Number(val), z.number().int().min(1).max(999))
+    age: z.preprocess(val => Number(val), z.number().int().min(14).max(120))
 })
 
 export const heightSchema = z.object({
-	height: z.preprocess(val => Number(val), z.number().int().min(1).max(999))
+    height: z.preprocess(val => Number(val), z.number().int().min(120).max(230))
 })
 
 export const weightSchema = z.object({
-	weight: z.preprocess(val => Number(val), z.number().min(1).max(999))
+    weight: z.preprocess(val => Number(val), z.number().min(30).max(250))
 })
 
 export const motivationSchema = z.object({
@@ -25,7 +25,7 @@ export const motivationSchema = z.object({
 })
 
 export const targetWeightSchema = z.object({
-	targetWeight: z.preprocess(val => Number(val), z.number().min(1).max(999))
+    targetWeight: z.preprocess(val => Number(val), z.number().min(30).max(250))
 })
 
 export const hasChildrenSchema = z.object({

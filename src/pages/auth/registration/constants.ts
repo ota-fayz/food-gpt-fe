@@ -42,7 +42,7 @@ export const STEPS = [
 		component: Age,
 		schema: ageSchema,
 		defaultValues: {
-			goal: null
+			age: null
 		}
 	},
 	{
@@ -56,7 +56,7 @@ export const STEPS = [
 		component: Weight,
 		schema: weightSchema,
 		defaultValues: {
-			height: null
+			weight: null
 		}
 	},
 	{
