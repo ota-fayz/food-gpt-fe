@@ -1,6 +1,6 @@
 export const ROUTER = {
-	DASHBOARD: '/',
 	WELCOME: '/welcome',
+	REGISTRATION: '/',
+	DASHBOARD: '/home',
 	NOT_FOUND: '*',
-	REGISTRATION: '/registration',
 }

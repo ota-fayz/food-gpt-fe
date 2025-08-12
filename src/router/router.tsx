@@ -9,12 +9,12 @@ const Dashboard = lazy(async () => await import('../pages/dashboard'))
 
 export const router = createBrowserRouter([
 	{
-		path: ROUTER.WELCOME,
-		element: <Welcome />
-	},
-	{
 		path: ROUTER.REGISTRATION,
 		element: <Registration />
+	},
+	{
+		path: ROUTER.WELCOME,
+		element: <Welcome />
 	},
 	{
 		path: ROUTER.DASHBOARD,
