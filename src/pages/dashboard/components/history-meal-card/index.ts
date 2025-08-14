@@ -1,0 +1,1 @@
+export { HistoryMealCard } from './HistoryMealCard'
