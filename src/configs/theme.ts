@@ -4,21 +4,21 @@ import { blue, grey } from '@mui/material/colors'
 export const theme = createTheme({
 	palette: {
 		primary: {
-			main: grey[900], // #212121 - темный для основных элементов
+			main: grey[900], // #212121 - dark for main elements
 		},
 		secondary: {
-			main: blue[500], // #2196f3 - синий для акцентов
+			main: blue[500], // #2196f3 - blue for accents
 		},
 		text: {
-			primary: grey[900], // #212121 - основной текст
-			secondary: grey[600], // #757575 - вторичный текст
+			primary: grey[900], // #212121 - primary text
+			secondary: grey[600], // #757575 - secondary text
 		},
 		background: {
-			default: grey[50], // #fafafa - фон приложения
-			paper: '#ffffff', // белый для карточек
+			default: grey[50], // #fafafa - app background
+			paper: '#ffffff', // white for cards
 		},
 		grey: {
-			...grey, // все оттенки серого от 50 до 900
+			...grey, // all grey shades from 50 to 900
 		}
 	},
 	typography: {

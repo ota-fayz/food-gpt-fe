@@ -1,53 +1,73 @@
-import { styled } from '@mui/material/styles'
-import Box from '@mui/material/Box'
+import { styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
 
-export const Container = styled(Box)(() => ({
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  width: '100%',
-  padding: '0',
-  overflowX: 'hidden'
-}))
+const DATE_ITEM_SIZE = 5;
+const ACTIVE_BORDER_RADIUS = 26;
+const TODAY_INDICATOR_SIZE = 6;
+const FUTURE_OPACITY = 0.3;
+
+export const Container = styled(Box)(({ theme }) => ({
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  width: "100%",
+  padding: 0,
+  gap: theme.spacing(0.5),
+}));
 
 interface DateItemProps {
-  isActive?: boolean
-  isToday?: boolean
-  isFuture?: boolean
+  isActive?: boolean;
+  isToday?: boolean;
+  isFuture?: boolean;
 }
 
 export const DateItem = styled(Box, {
-  shouldForwardProp: (prop) => prop !== 'isActive' && prop !== 'isToday' && prop !== 'isFuture'
+  shouldForwardProp: (prop) =>
+    prop !== "isActive" && prop !== "isToday" && prop !== "isFuture",
 })<DateItemProps>(({ theme, isActive, isToday, isFuture }) => ({
-  fontSize: '20px',
-  fontWeight: isActive ? 500 : 400,
-  color: isActive ? theme.palette.grey[400] : theme.palette.grey[700],
-  textAlign: 'center',
-  minWidth: '40px',
-  height: '40px',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  borderRadius: isActive ? '26px' : '0',
-  backgroundColor: isActive ? theme.palette.grey[200] : 'transparent',
-  lineHeight: 1.21,
-  cursor: isFuture ? 'not-allowed' : 'pointer',
-  transition: 'all 0.2s ease',
-  userSelect: 'none',
-  flex: '1 0 auto',
-  position: 'relative',
-  opacity: isFuture ? 0.3 : 1,
-  ...(isToday && !isActive && {
-    '&::after': {
-      content: '""',
-      position: 'absolute',
-      bottom: '4px',
-      left: '50%',
-      transform: 'translateX(-50%)',
-      width: '6px',
-      height: '6px',
-      borderRadius: '50%',
-      backgroundColor: theme.palette.primary.main
-    }
-  })
-}))
+  ...theme.typography.h6,
+  textAlign: "center" as const,
+  minWidth: theme.spacing(DATE_ITEM_SIZE),
+  height: theme.spacing(DATE_ITEM_SIZE),
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  transition: theme.transitions.create(["all"], {
+    duration: theme.transitions.duration.short,
+  }),
+  userSelect: "none" as const,
+  flex: "1 0 auto",
+  position: "relative" as const,
+  fontWeight: isActive
+    ? theme.typography.fontWeightMedium
+    : theme.typography.fontWeightRegular,
+  color: isActive
+    ? theme.palette.text.primary
+    : isFuture
+    ? theme.palette.text.disabled
+    : theme.palette.text.secondary,
+  borderRadius: isActive ? ACTIVE_BORDER_RADIUS : 0,
+  backgroundColor: isActive ? theme.palette.action.selected : "transparent",
+  cursor: isFuture ? "not-allowed" : "pointer",
+  opacity: isFuture ? FUTURE_OPACITY : 1,
+  "&:hover": {
+    ...(!isFuture &&
+      !isActive && {
+        backgroundColor: theme.palette.action.hover,
+      }),
+  },
+  ...(isToday &&
+    !isActive && {
+      "&::after": {
+        content: '""',
+        position: "absolute" as const,
+        bottom: theme.spacing(0.5),
+        left: "50%",
+        transform: "translateX(-50%)",
+        width: TODAY_INDICATOR_SIZE,
+        height: TODAY_INDICATOR_SIZE,
+        borderRadius: "50%",
+        backgroundColor: theme.palette.primary.main,
+      },
+    }),
+}));

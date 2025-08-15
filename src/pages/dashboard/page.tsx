@@ -24,7 +24,6 @@ import {
   HeaderActions,
 } from "./styles";
 
-// CONSTANTS
 const REMAINING_CALORIES = 1564;
 const CALORIE_ADDITION = 61;
 
@@ -104,7 +103,6 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const theme = useTheme();
   const [isAddOpen, setIsAddOpen] = useState(false);
-  const [currentDate, setCurrentDate] = useState(() => new Date());
 
   const macros: MacroData[] = [
     {
@@ -161,10 +159,7 @@ const Dashboard = () => {
           ))}
         </WeekDays>
         <DateRow>
-          <ScrollableDates
-            activeDate={currentDate}
-            onChange={setCurrentDate}
-          />
+          <ScrollableDates />
         </DateRow>
       </CalendarSection>
 
