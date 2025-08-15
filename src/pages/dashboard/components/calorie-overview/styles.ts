@@ -1,98 +1,122 @@
-import { styled } from '@mui/material/styles'
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import CircularProgress from '@mui/material/CircularProgress'
+import { styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import LinearProgress from "@mui/material/LinearProgress";
+import CircularProgress from "@mui/material/CircularProgress";
 
-export const Card = styled(Box)(({ theme }) => ({
+export const Container = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
-  borderRadius: 16,
+  borderRadius: theme.spacing(2),
   padding: theme.spacing(3),
-  display: 'flex',
-  alignItems: 'center',
-  gap: theme.spacing(3),
-  minHeight: '200px'
-}))
+  display: "flex",
+  alignItems: "center",
+  gap: theme.spacing(4),
+  minHeight: theme.spacing(25),
+}));
 
-export const CircularContainer = styled(Box)(() => ({
-  position: 'relative',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  '& .MuiCircularProgress-root:first-of-type': {
-    color: '#e0e0e0',
-    transform: 'rotate(-90deg)'
-  },
-  '& .MuiCircularProgress-root:last-of-type': {
-    position: 'absolute',
-    transform: 'rotate(-90deg)'
-  }
-}))
+export const ChartSection = styled(Box)(() => ({
+  position: "relative",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  flexShrink: 0,
+}));
 
-export const CalorieContent = styled(Box)(() => ({
-  position: 'absolute',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center',
-  textAlign: 'center'
-}))
+export const CircularProgressContainer = styled(Box)(({ theme }) => ({
+  position: "relative",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  width: theme.spacing(22.5),
+  height: theme.spacing(22.5),
+}));
+
+export const BackgroundCircularProgress = styled(CircularProgress)(
+  ({ theme }) => ({
+    color: theme.palette.grey[300],
+    position: "absolute",
+    top: 0,
+    left: 0,
+    zIndex: 1,
+  })
+);
+
+export const ProgressCircularProgress = styled(CircularProgress)(
+  ({ theme }) => ({
+    color: theme.palette.grey[800],
+    position: "absolute",
+    top: 0,
+    left: 0,
+    zIndex: 2,
+    transform: "rotate(-90deg) !important",
+    "& .MuiCircularProgress-circle": {
+      strokeLinecap: "round",
+    },
+  })
+);
+
+export const ChartContent = styled(Box)(({ theme }) => ({
+  position: "absolute",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  textAlign: "center",
+  gap: theme.spacing(0.5),
+  zIndex: 3,
+}));
 
 export const CalorieNumber = styled(Box)(({ theme }) => ({
-  fontSize: '43.4px',
-  fontWeight: 700,
+  ...theme.typography.h3,
   color: theme.palette.text.primary,
-  lineHeight: 1.21,
-  marginBottom: theme.spacing(1)
-}))
+}));
+
+export const CalorieLabel = styled(Box)(({ theme }) => ({
+  ...theme.typography.body2,
+  color: theme.palette.text.secondary,
+}));
+
+export const MacroSection = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  gap: theme.spacing(3),
+  flex: 1,
+}));
+
+export const MacroItem = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  gap: theme.spacing(1),
+}));
 
 export const MacroHeader = styled(Box)(() => ({
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center'
-}))
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+}));
 
 export const MacroLabel = styled(Box)(({ theme }) => ({
-  fontSize: '19px',
-  fontWeight: 500,
+  ...theme.typography.h6,
   color: theme.palette.text.primary,
-  lineHeight: 1.21
-}))
+}));
 
 export const MacroValue = styled(Box)(({ theme }) => ({
-  fontSize: '15.7px',
+  ...theme.typography.body1,
   color: theme.palette.text.secondary,
-  lineHeight: 1.21
-}))
+}));
 
-export const MacroProgressBar = styled(Box)(({ theme }) => ({
-  width: '100%',
-  height: '14px',
-  backgroundColor: theme.palette.grey[200],
-  borderRadius: '7px',
-  overflow: 'hidden'
-}))
+export const MacroProgressContainer = styled(Box)(({ theme }) => ({
+  width: "100%",
+  height: theme.spacing(1),
+}));
 
-export const MacroProgress = styled('div')<{ width: number; color: string }>(({ width, color }) => ({
-  width: `${width}%`,
-  height: '100%',
-  backgroundColor: color,
-  transition: 'width 0.3s ease'
-}))
-
-export const AdditionButton = styled(Button)(({ theme }) => ({
-  backgroundColor: theme.palette.background.paper,
-  color: theme.palette.text.secondary,
-  borderRadius: '12px',
-  padding: theme.spacing(1, 2),
-  minWidth: 'auto',
-  fontSize: '18px',
-  fontWeight: 400,
-  textTransform: 'none',
-  boxShadow: 'none',
-  border: 'none',
-  marginTop: theme.spacing(1),
-  '&:hover': {
-    backgroundColor: theme.palette.grey[50],
-    boxShadow: 'none'
-  }
-}))
+export const StyledLinearProgress = styled(LinearProgress)<{
+  macroColor: string;
+}>(({ theme, macroColor }) => ({
+  height: theme.spacing(1.5),
+  borderRadius: theme.spacing(0.875),
+  backgroundColor: theme.palette.grey[300],
+  "& .MuiLinearProgress-bar": {
+    backgroundColor: macroColor,
+    borderRadius: theme.spacing(0.875),
+  },
+}));

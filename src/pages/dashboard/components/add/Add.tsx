@@ -1,40 +1,50 @@
-import Drawer from '@mui/material/Drawer'
+import { useState } from 'react'
 import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
-import Box from '@mui/material/Box'
-import Stack from '@mui/material/Stack'
 import CloseIcon from '@mui/icons-material/Close'
+import AddIcon from '@mui/icons-material/Add'
 import CameraAltIcon from '@mui/icons-material/CameraAlt'
 import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary'
 import EditIcon from '@mui/icons-material/Edit'
-import FavoriteIcon from '@mui/icons-material/Favorite'
 
-import type { AddSheetProps, AddOption } from './types'
-import { Container, Header, OptionItem, IconContainer, OptionText } from './styles'
+import type { AddOption } from './types'
+import {
+  StyledFab,
+  StyledDrawer,
+  SheetContent,
+  Header,
+  OptionItem,
+  IconContainer,
+  OptionText,
+} from './styles'
 
 const OPTIONS: AddOption[] = [
   { id: 'camera', label: 'Камера', icon: CameraAltIcon },
   { id: 'gallery', label: 'Фотогалерея', icon: PhotoLibraryIcon },
   { id: 'manual', label: 'Описать вручную', icon: EditIcon },
-  { id: 'favorites', label: 'Избранное', icon: FavoriteIcon }
 ]
 
-export const AddSheet = ({ open, onClose }: AddSheetProps) => {
+export const Add = () => {
+  const [isOpen, setIsOpen] = useState(false)
+
   const handleOptionClick = (optionId: string) => {
     console.log(`Selected option: ${optionId}`)
-    onClose()
+    setIsOpen(false)
   }
 
   return (
-    <Drawer anchor="bottom" open={open} onClose={onClose}>
-      <Container>
-        <Header>
-          <IconButton onClick={onClose} size="large">
-            <CloseIcon />
-          </IconButton>
-        </Header>
-        
-        <Stack>
+    <>
+      <StyledFab aria-label="add" onClick={() => setIsOpen(true)}>
+        <AddIcon />
+      </StyledFab>
+
+      <StyledDrawer anchor="bottom" open={isOpen} onClose={() => setIsOpen(false)}>
+        <SheetContent>
+          <Header>
+            <IconButton onClick={() => setIsOpen(false)} size="medium">
+              <CloseIcon />
+            </IconButton>
+          </Header>
+          
           {OPTIONS.map((option) => {
             const Icon = option.icon
             return (
@@ -51,8 +61,8 @@ export const AddSheet = ({ open, onClose }: AddSheetProps) => {
               </OptionItem>
             )
           })}
-        </Stack>
-      </Container>
-    </Drawer>
+        </SheetContent>
+      </StyledDrawer>
+    </>
   )
 }

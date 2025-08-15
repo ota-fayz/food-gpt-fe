@@ -7,7 +7,6 @@ export const Container = styled("div")(({ theme }) => ({
   height: "100vh",
   backgroundColor: theme.palette.background.default,
   overflow: "hidden",
-  padding: theme.spacing(4),
 }));
 
 export const Header = styled("div")(() => ({

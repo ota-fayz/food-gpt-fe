@@ -3,60 +3,64 @@ import Box from '@mui/material/Box'
 
 export const StyledCard = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
-  borderRadius: '22px',
+  borderRadius: theme.spacing(3),
   border: `1px solid ${theme.palette.grey[200]}`,
-  padding: theme.spacing(2),
+  padding: theme.spacing(2.5),
   display: 'flex',
   alignItems: 'center',
   gap: theme.spacing(2),
-  marginBottom: theme.spacing(1)
+  boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
 }))
 
 export const IconContainer = styled(Box)(({ theme }) => ({
-  width: '110px',
-  height: '109px',
-  borderRadius: '10px',
+  width: theme.spacing(14),
+  height: theme.spacing(13.5),
+  borderRadius: theme.spacing(1.5),
   backgroundColor: theme.palette.grey[100],
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   flexShrink: 0,
   backgroundSize: 'cover',
-  backgroundPosition: 'center'
+  backgroundPosition: 'center',
+  overflow: 'hidden',
+}))
+
+export const FoodPlaceholder = styled(Box)(({ theme }) => ({
+  fontSize: theme.spacing(6),
+  opacity: 0.6,
 }))
 
 export const ContentContainer = styled(Box)(() => ({
   flex: 1,
   display: 'flex',
-  flexDirection: 'column'
+  flexDirection: 'column',
+  minWidth: 0,
 }))
 
 export const Title = styled(Box)(({ theme }) => ({
-  fontSize: '18px',
-  fontWeight: 400,
+  ...theme.typography.h6,
   color: theme.palette.text.secondary,
-  lineHeight: 1.21
+  fontWeight: 400,
 }))
 
 export const Calories = styled(Box)(({ theme }) => ({
-  fontSize: '24.2px',
-  fontWeight: 500,
+  ...theme.typography.h5,
   color: theme.palette.text.primary,
-  lineHeight: 1.21
+  fontWeight: 600,
 }))
 
 export const Subtitle = styled(Box)(({ theme }) => ({
-  fontSize: '18px',
-  fontWeight: 400,
+  ...theme.typography.body2,
   color: theme.palette.text.secondary,
-  lineHeight: 1.21
+  fontWeight: 400,
 }))
 
 export const Time = styled(Box)(({ theme }) => ({
-  fontSize: '16.2px',
+  ...theme.typography.body2,
+  color: theme.palette.grey[500],
   fontWeight: 400,
-  color: theme.palette.grey[400],
-  lineHeight: 1.21,
   alignSelf: 'flex-start',
-  marginTop: theme.spacing(0.5)
+  marginTop: theme.spacing(0.5),
+  minWidth: 'fit-content',
 }))
