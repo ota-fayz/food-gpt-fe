@@ -1,4 +1,4 @@
-import type { UserProfile, NutritionPlan, PersonalizationSetting } from '../../types'
+import type { UserProfile, NutritionPlan } from '../../types'
 
 export const MOCK_USER_PROFILE: UserProfile = {
   goal: '79 кг',
@@ -35,15 +35,7 @@ export const MOCK_NUTRITION_PLAN: NutritionPlan = {
   ]
 }
 
-export const MOCK_PERSONALIZATION_SETTINGS: PersonalizationSetting[] = [
-  {
-    id: 'plan',
-    title: 'Ваш план',
-    description: 'Управляйте дневным количеством кбжу и калорий',
-    icon: '📊',
-    enabled: true
-  },
-]
+
 
 export const PROFILE_ICONS = {
   goal: '🎯',

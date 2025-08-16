@@ -2,13 +2,12 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import IconButton from '@mui/material/IconButton'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
-import Stack from '@mui/material/Stack'
 
-import { ProfileCard } from './components/profile-card'
-import { SettingsCard } from './components/settings-card'
-import { PlanSheet } from './components/plan-sheet'
-import { MOCK_USER_PROFILE, MOCK_NUTRITION_PLAN, MOCK_PERSONALIZATION_SETTINGS, PROFILE_ICONS } from './data'
-import type { NutritionPlan, PersonalizationSetting } from '../../types'
+import { Card } from './components/card'
+import { Personalization } from './components/personalization'
+import { Edit } from './components/edit'
+import { MOCK_USER_PROFILE, MOCK_NUTRITION_PLAN, PROFILE_ICONS } from './data'
+import type { NutritionPlan } from '../../types'
 import { 
   Container, 
   Header, 
@@ -16,38 +15,52 @@ import {
   Title, 
   Content, 
   Section, 
-  SectionTitle, 
   CardGrid,
 } from './styles'
 
 const Profile = () => {
   const navigate = useNavigate()
-  const [isPlanSheetOpen, setIsPlanSheetOpen] = useState(false)
+
   const [nutritionPlan, setNutritionPlan] = useState<NutritionPlan>(MOCK_NUTRITION_PLAN)
-  const [settings, setSettings] = useState<PersonalizationSetting[]>(MOCK_PERSONALIZATION_SETTINGS)
+  const [userProfile, setUserProfile] = useState(MOCK_USER_PROFILE)
+  const [editModal, setEditModal] = useState<{
+    open: boolean
+    field: 'goal' | 'age' | 'weight' | 'height' | 'activity'
+    currentValue: string | number
+  }>({
+    open: false,
+    field: 'goal',
+    currentValue: ''
+  })
 
   const handleBack = () => {
     navigate(-1)
   }
 
-  const handlePlanClick = () => {
-    setIsPlanSheetOpen(true)
-  }
-
   const handlePlanSave = (plan: NutritionPlan) => {
     setNutritionPlan(plan)
-    setIsPlanSheetOpen(false)
   }
 
-  const handleSettingToggle = (settingId: string, enabled: boolean) => {
-    setSettings(prev => prev.map(setting => 
-      setting.id === settingId ? { ...setting, enabled } : setting
-    ))
+  const handleEditProfile = (field: 'goal' | 'age' | 'weight' | 'height' | 'activity') => {
+    setEditModal({
+      open: true,
+      field,
+      currentValue: userProfile[field]
+    })
   }
 
-  const handleEditProfile = (field: string) => {
-    console.log(`Edit ${field}`)
-    // TODO: Implement profile editing
+  const handleProfileSave = (value: string | number) => {
+    setUserProfile(prev => ({
+      ...prev,
+      [editModal.field]: value
+    }))
+  }
+
+  const handleEditModalClose = () => {
+    setEditModal(prev => ({
+      ...prev,
+      open: false
+    }))
   }
 
   return (
@@ -64,66 +77,54 @@ const Profile = () => {
       <Content>
         <Section>
           <CardGrid>
-            <ProfileCard
+            <Card
               icon={PROFILE_ICONS.goal}
               label="Ваша цель"
-              value={MOCK_USER_PROFILE.goal}
+              value={userProfile.goal}
               onClick={() => handleEditProfile('goal')}
             />
-            <ProfileCard
+            <Card
               icon={PROFILE_ICONS.age}
               label="Возраст"
-              value={MOCK_USER_PROFILE.age}
+              value={userProfile.age}
               unit="лет"
               onClick={() => handleEditProfile('age')}
             />
-            <ProfileCard
+            <Card
               icon={PROFILE_ICONS.weight}
               label="Вес"
-              value={MOCK_USER_PROFILE.weight}
+              value={userProfile.weight}
               unit="кг"
               onClick={() => handleEditProfile('weight')}
             />
-            <ProfileCard
+            <Card
               icon={PROFILE_ICONS.height}
               label="Рост"
-              value={MOCK_USER_PROFILE.height}
+              value={userProfile.height}
               unit="см"
               onClick={() => handleEditProfile('height')}
             />
-            <ProfileCard
+            <Card
               icon={PROFILE_ICONS.activity}
               label="Активность"
-              value={MOCK_USER_PROFILE.activity}
+              value={userProfile.activity}
               onClick={() => handleEditProfile('activity')}
             />
           </CardGrid>
-        </Section>
-
-        <Section>
-          <SectionTitle>Персонализация</SectionTitle>
-          <Stack spacing={1}>
-            {settings.map((setting) => (
-              <SettingsCard
-                key={setting.id}
-                icon={setting.icon}
-                title={setting.title}
-                description={setting.description}
-                enabled={setting.enabled}
-                showToggle={setting.id !== 'plan'}
-                onClick={setting.id === 'plan' ? handlePlanClick : undefined}
-                onToggle={setting.id !== 'plan' ? (enabled) => handleSettingToggle(setting.id, enabled) : undefined}
-              />
-            ))}
-          </Stack>
+          
+          <Personalization 
+            plan={nutritionPlan}
+            onPlanSave={handlePlanSave}
+          />
         </Section>
       </Content>
 
-      <PlanSheet
-        open={isPlanSheetOpen}
-        onClose={() => setIsPlanSheetOpen(false)}
-        plan={nutritionPlan}
-        onSave={handlePlanSave}
+      <Edit
+        open={editModal.open}
+        onClose={handleEditModalClose}
+        field={editModal.field}
+        currentValue={editModal.currentValue}
+        onSave={handleProfileSave}
       />
     </Container>
   )

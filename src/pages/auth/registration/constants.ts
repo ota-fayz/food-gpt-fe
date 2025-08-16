@@ -4,11 +4,11 @@ import { Age } from './components/age'
 import { Height } from './components/height'
 import { Weight } from './components/weight'
 import { Motivation } from './components/motivation'
-import { TargetWeight } from './components/target-weight'
-import { HasChildren } from './components/has-children'
+import { Target } from './components/target'
+import { Children } from './components/children'
 import { Diet } from './components/diet'
 import { Activity } from './components/activity'
-import { TrackingDuration } from './components/tracking-duration'
+import { Duration } from './components/duration'
 import {
 	ageSchema,
 	genderSchema,
@@ -67,14 +67,14 @@ export const STEPS = [
 		}
 	},
 	{
-		component: TargetWeight,
+		component: Target,
 		schema: targetWeightSchema,
 		defaultValues: {
 			targetWeight: null
 		}
 	},
 	{
-		component: HasChildren,
+		component: Children,
 		schema: hasChildrenSchema,
 		defaultValues: {
 			hasChildren: null
@@ -95,7 +95,7 @@ export const STEPS = [
 		}
 	},
 	{
-		component: TrackingDuration,
+		component: Duration,
 		schema: trackingDurationSchema,
 		defaultValues: {
 			trackingDuration: null

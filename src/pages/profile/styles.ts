@@ -10,26 +10,25 @@ export const Container = styled(Box)(({ theme }) => ({
   overflow: 'auto'
 }))
 
-export const Header = styled(Box)(() => ({
+export const Header = styled(Box)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
   position: 'relative',
-  padding: '24px 16px'
+  padding: theme.spacing(3, 2)
 }))
 
-export const HeaderActions = styled(Box)(() => ({
+export const HeaderActions = styled(Box)(({ theme }) => ({
   position: 'absolute',
-  left: 16,
+  left: theme.spacing(2),
   display: 'flex',
   alignItems: 'center'
 }))
 
 export const Title = styled(Box)(({ theme }) => ({
-  fontSize: '33px',
+  ...theme.typography.h4,
   fontWeight: 600,
-  color: theme.palette.text.primary,
-  lineHeight: 1.21
+  color: theme.palette.text.primary
 }))
 
 export const Content = styled(Box)(({ theme }) => ({
@@ -43,15 +42,14 @@ export const Section = styled(Box)(({ theme }) => ({
 }))
 
 export const SectionTitle = styled(Box)(({ theme }) => ({
-  fontSize: '26px',
+  ...theme.typography.h5,
   fontWeight: 500,
   color: theme.palette.text.primary,
-  lineHeight: 1.21,
   marginBottom: theme.spacing(2)
 }))
 
 export const CardGrid = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
-  gap: theme.spacing(1)
+  gap: theme.spacing(1.5)
 }))

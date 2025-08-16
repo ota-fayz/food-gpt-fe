@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 
-import { ScrollableDates } from "./components/scrollable-dates";
-import { CalorieOverview } from "./components/calorie-overview";
-import { HistoryMealCard } from "./components/history-meal-card";
+import { Dates } from "./components/dates";
+import { Overview } from "./components/overview";
+import { Meal } from "./components/meal";
 import { Add } from "./components/add";
 import IconButton from "@mui/material/IconButton";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
@@ -154,12 +154,12 @@ const Dashboard = () => {
           ))}
         </WeekDays>
         <DateRow>
-          <ScrollableDates />
+          <Dates />
         </DateRow>
       </CalendarSection>
 
       <MainSection>
-        <CalorieOverview
+        <Overview
           remainingCalories={REMAINING_CALORIES}
           macros={macros}
         />
@@ -170,7 +170,7 @@ const Dashboard = () => {
           История
         </Typography>
         {HISTORY_MEALS.map((m, idx) => (
-          <HistoryMealCard
+          <Meal
             key={`${m.title}-${idx}`}
             title={m.title}
             calories={m.calories}

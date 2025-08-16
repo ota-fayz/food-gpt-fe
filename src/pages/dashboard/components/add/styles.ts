@@ -32,7 +32,7 @@ export const StyledDrawer = styled(Drawer)(({ theme }) => ({
 
 export const SheetContent = styled(Box)(({ theme }) => ({
   width: '100%',
-  padding: theme.spacing(1, 0, 1),
+  padding: theme.spacing(2, 0, 1),
   backgroundColor: theme.palette.background.paper,
 }))
 
