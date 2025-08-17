@@ -1,7 +1,9 @@
+import type { FieldKey } from './constants'
+
 export interface EditProps {
   open: boolean
   onClose: () => void
-  field: 'goal' | 'age' | 'weight' | 'height' | 'activity'
+  field: FieldKey
   currentValue: string | number
   onSave: (value: string | number) => void
 }

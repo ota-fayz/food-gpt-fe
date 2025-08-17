@@ -3,7 +3,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 
 import type { PersonalizationProps } from './types'
 import type { NutritionPlan } from '../../../../types'
-import { PlanDrawer } from './drawer'
+import { Edit } from './components/edit'
 import { 
   SectionTitle, 
   Card, 
@@ -40,7 +40,7 @@ export const Personalization = ({ plan, onPlanSave }: PersonalizationProps) => {
         
         <ContentContainer>
           <Title>Ваш план</Title>
-          <Description>Управляйте дневным количеством кбжу и калорий</Description>
+          <Description>Управляйте дневным количеством КБЖУ и калорий</Description>
         </ContentContainer>
         
         <ArrowIcon>
@@ -49,7 +49,7 @@ export const Personalization = ({ plan, onPlanSave }: PersonalizationProps) => {
       </Card>
 
       {plan && (
-        <PlanDrawer
+        <Edit
           open={isPlanOpen}
           onClose={handlePlanClose}
           plan={plan}

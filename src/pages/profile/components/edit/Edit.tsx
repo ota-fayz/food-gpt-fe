@@ -1,8 +1,4 @@
 import { useForm } from 'react-hook-form'
-import Dialog from '@mui/material/Dialog'
-
-import DialogContent from '@mui/material/DialogContent'
-import DialogActions from '@mui/material/DialogActions'
 import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'
 import CloseIcon from '@mui/icons-material/Close'
@@ -10,8 +6,14 @@ import CloseIcon from '@mui/icons-material/Close'
 import { Input } from '../../../../components/input'
 import { RadioGroup } from '../../../../components/radio'
 import type { EditProps, ProfileFormData } from './types'
-import { ACTIVITY_OPTIONS } from './constants'
-import { StyledDialogTitle, StyledForm } from './styles'
+import { FIELD_CONFIG } from './constants'
+import { 
+  StyledDialog,
+  StyledDialogTitle, 
+  StyledDialogContent,
+  StyledDialogActions,
+  StyledForm 
+} from './styles'
 
 export const Edit = ({ 
   open, 
@@ -20,6 +22,8 @@ export const Edit = ({
   currentValue, 
   onSave 
 }: EditProps) => {
+  const fieldConfig = FIELD_CONFIG[field]
+  
   const { control, handleSubmit, reset } = useForm<ProfileFormData>({
     defaultValues: {
       value: currentValue || ''
@@ -36,71 +40,77 @@ export const Edit = ({
     handleClose()
   }
 
-  const getFieldLabel = () => {
-    switch (field) {
-      case 'goal': return 'Ваша цель'
-      case 'age': return 'Возраст'
-      case 'weight': return 'Вес'
-      case 'height': return 'Рост'
-      case 'activity': return 'Активность'
-      default: return 'Значение'
-    }
-  }
-
-  const getInputType = () => {
-    return ['age', 'weight', 'height'].includes(field) ? 'number' : 'text'
-  }
-
-  const getUnit = () => {
-    switch (field) {
-      case 'age': return 'лет'
-      case 'weight': return 'кг'
-      case 'height': return 'см'
-      default: return ''
+  const renderInput = () => {
+    switch (fieldConfig.type) {
+      case 'radio':
+        return (
+          <RadioGroup
+            name="value"
+            control={control}
+            options={fieldConfig.options!}
+            label={fieldConfig.label}
+          />
+        )
+      case 'number':
+      case 'text':
+      default:
+        return (
+          <Input
+            name="value"
+            control={control}
+            label={fieldConfig.label}
+            type={fieldConfig.type === 'number' ? 'number' : 'text'}
+            fullWidth
+            variant="outlined"
+            placeholder={fieldConfig.placeholder}
+            helperText={fieldConfig.unit ? `💡 Указывается в ${fieldConfig.unit}` : undefined}
+          />
+        )
     }
   }
 
   return (
-    <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
+    <StyledDialog 
+      open={open} 
+      onClose={handleClose} 
+      maxWidth="sm" 
+      fullWidth
+      TransitionProps={{
+        style: {
+          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+        }
+      }}
+    >
       <StyledDialogTitle>
-        Редактировать {getFieldLabel().toLowerCase()}
+        {fieldConfig.icon && (
+          <span style={{ 
+            marginRight: 12, 
+            fontSize: '1.5em',
+            filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))'
+          }}>
+            {fieldConfig.icon}
+          </span>
+        )}
+        {fieldConfig.editTitle}
         <IconButton onClick={handleClose} size="small">
           <CloseIcon />
         </IconButton>
       </StyledDialogTitle>
       
-      <DialogContent>
+      <StyledDialogContent>
         <StyledForm onSubmit={handleSubmit(onSubmit)}>
-          {field === 'activity' ? (
-            <RadioGroup
-              name="value"
-              control={control}
-              options={ACTIVITY_OPTIONS}
-              label={getFieldLabel()}
-            />
-          ) : (
-            <Input
-              name="value"
-              control={control}
-              label={getFieldLabel()}
-              type={getInputType()}
-              fullWidth
-              variant="outlined"
-              placeholder={`Введите ${getFieldLabel().toLowerCase()}`}
-              helperText={getUnit() && `Указывается в ${getUnit()}`}
-            />
-          )}
+          {renderInput()}
         </StyledForm>
-      </DialogContent>
+      </StyledDialogContent>
       
-      <DialogActions>
-        <Button onClick={handleClose} variant="outlined">
+      <StyledDialogActions>
+        <Button onClick={handleClose} variant="outlined" color="inherit">
           Отмена
         </Button>
         <Button onClick={handleSubmit(onSubmit)} variant="contained">
           Сохранить
         </Button>
-      </DialogActions>
-    </Dialog>
+      </StyledDialogActions>
+    </StyledDialog>
   )
 }
