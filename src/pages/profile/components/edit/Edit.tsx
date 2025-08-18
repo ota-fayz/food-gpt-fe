@@ -12,7 +12,8 @@ import {
   StyledDialogTitle, 
   StyledDialogContent,
   StyledDialogActions,
-  StyledForm 
+  StyledForm,
+  IconSpan
 } from './styles'
 
 export const Edit = ({ 
@@ -75,21 +76,12 @@ export const Edit = ({
       onClose={handleClose} 
       maxWidth="sm" 
       fullWidth
-      TransitionProps={{
-        style: {
-          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-        }
-      }}
     >
       <StyledDialogTitle>
         {fieldConfig.icon && (
-          <span style={{ 
-            marginRight: 12, 
-            fontSize: '1.5em',
-            filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))'
-          }}>
+          <IconSpan>
             {fieldConfig.icon}
-          </span>
+          </IconSpan>
         )}
         {fieldConfig.editTitle}
         <IconButton onClick={handleClose} size="small">

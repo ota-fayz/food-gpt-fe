@@ -54,6 +54,7 @@ export const DateItem = styled(Box, {
     ...(!isFuture &&
       !isActive && {
         backgroundColor: theme.palette.action.hover,
+        borderRadius: ACTIVE_BORDER_RADIUS,
       }),
   },
   ...(isToday &&

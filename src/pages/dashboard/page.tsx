@@ -24,7 +24,7 @@ import {
 
 const REMAINING_CALORIES = 1564;
 
-const WEEK_DAYS = ["Пн", "Вт", "Ср", "Чт", "Пт", "сб", "Вс"];
+const WEEK_DAYS = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
 
 const HISTORY_MEALS = [
   {
