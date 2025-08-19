@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { ROUTER } from "../../constants/router";
 import type { MacroData } from "../../types";
+import { TelegramUserInfo } from "../../components/telegram";
 import {
   Container,
   Header,
@@ -122,6 +123,7 @@ const Dashboard = () => {
 
   return (
     <Container>
+      <TelegramUserInfo />
       <Header>
         <Typography variant="h3" component="h1">
           FoodGPT

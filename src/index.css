@@ -5,10 +5,17 @@
   box-sizing: border-box;
 }
 
+:root {
+  /* Telegram Web App variables */
+  --tg-viewport-height: 100vh;
+  --tg-viewport-stable-height: 100vh;
+}
+
 a {
   text-decoration: none;
 }
 
+/* Default styles */
 #root {
   width: 100vw;
   height: 100vh;
@@ -19,4 +26,49 @@ a {
 
   max-width: 425px;
   margin: 0 auto;
+}
+
+/* Telegram Web App specific styles */
+.tg-web-app {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--tg-viewport-height, 100vh);
+  overflow: hidden;
+}
+
+/* Safe area for Telegram */
+.tg-safe-area {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+/* Telegram Web App body */
+body.tg-web-app {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  min-height: var(--tg-viewport-height, 100vh);
+  height: var(--tg-viewport-height, 100vh);
+  overflow: hidden;
+}
+
+/* Telegram Web App root */
+#root.tg-web-app {
+  height: var(--tg-viewport-height, 100vh);
+  min-height: var(--tg-viewport-height, 100vh);
+  overflow: auto;
+  position: relative;
+}
+
+/* Mobile responsive design */
+@media (max-width: 768px) {
+  #root {
+    max-width: 100%;
+  }
 }

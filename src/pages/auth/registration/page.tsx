@@ -10,25 +10,39 @@ import { Form, Wrapper } from './styles'
 import { usePage } from './usePage'
 
 const Registration = () => {
-	const {handleBack, onSubmit, CurrentStep, form, progress} = usePage()
+	const {handleBack, onSubmit, CurrentStep, form, progress, isWebApp, user} = usePage()
 
 	return (
 		<FormProvider {...form}>
 			<Form onSubmit={form.handleSubmit(onSubmit)}>
 				<Stack spacing={2}>
 					<Wrapper>
-						<IconButton aria-label="back" onClick={handleBack}>
-							<ArrowBackIcon />
-						</IconButton>
+						{!isWebApp && (
+							<IconButton aria-label="back" onClick={handleBack}>
+								<ArrowBackIcon />
+							</IconButton>
+						)}
 						<Box width="100%">
 							<LinearProgress variant="determinate" value={progress} />
 						</Box>
 					</Wrapper>
+					{/* Show user info if available from Telegram */}
+					{isWebApp && user && (
+						<Box sx={{ p: 1, bgcolor: 'background.paper', borderRadius: 1 }}>
+							<Stack direction="row" spacing={1} alignItems="center">
+								<Box>
+									Привет, {user.first_name}!
+								</Box>
+							</Stack>
+						</Box>
+					)}
 					<CurrentStep />
 				</Stack>
-				<Button type="submit" disabled={!form.formState.isValid} variant="contained" size="large">
-					Далее
-				</Button>
+				{!isWebApp && (
+					<Button type="submit" disabled={!form.formState.isValid} variant="contained" size="large">
+						Далее
+					</Button>
+				)}
 			</Form>
 		</FormProvider>
 	)

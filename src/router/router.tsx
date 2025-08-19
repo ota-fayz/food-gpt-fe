@@ -7,6 +7,7 @@ const Welcome = lazy(async () => await import('../pages/auth/welcome'))
 const Registration = lazy(async () => await import('../pages/auth/registration'))
 const Dashboard = lazy(async () => await import('../pages/dashboard'))
 const Profile = lazy(async () => await import('../pages/profile'))
+const TelegramTest = lazy(async () => await import('../pages/telegram-test'))
 
 export const router = createBrowserRouter([
 	{
@@ -24,5 +25,9 @@ export const router = createBrowserRouter([
 	{
 		path: ROUTER.PROFILE,
 		element: <Profile />
+	},
+	{
+		path: '/telegram-test',
+		element: <TelegramTest />
 	}
 ])
