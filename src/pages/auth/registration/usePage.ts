@@ -33,7 +33,7 @@ export const usePage = () => {
 	const handleBack = () => {
 		impactFeedback('light')
 		if (stepIndex === 0) {
-			navigate(-1)
+			navigate(ROUTER.WELCOME)
 		} else {
 			setStepIndex(stepIndex - 1)
 		}
@@ -56,12 +56,8 @@ export const usePage = () => {
 	// Set up Telegram buttons
 	useEffect(() => {
 		if (isWebApp) {
-			// Set up back button
-			if (stepIndex > 0) {
-				setBackButton(handleBack)
-			} else {
-				hideBackButton()
-			}
+			// Always show back button, on first step leads to Welcome
+			setBackButton(handleBack)
 
 			// Set up main button
 			setMainButton({
