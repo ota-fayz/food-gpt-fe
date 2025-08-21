@@ -36,13 +36,18 @@ import {
   isPopupSupported,
 } from '@telegram-apps/sdk';
 
-import type { TelegramWebApp, TelegramUser } from '../types/telegram';
+import type { TelegramWebApp, TelegramUser, TelegramInitData } from '../types/telegram';
+
+// Narrow type for launch params to avoid using any
+interface TelegramLaunchParams {
+  initData?: TelegramInitData;
+}
 
 export class TelegramService {
   private static instance: TelegramService;
   private isInitialized = false;
   private _user: TelegramUser | null = null;
-  private _launchParams: any = null;
+  private _launchParams: TelegramLaunchParams | null = null;
 
   static getInstance(): TelegramService {
     if (!TelegramService.instance) {
@@ -68,7 +73,7 @@ export class TelegramService {
 
       // Get launch parameters
       try {
-        this._launchParams = retrieveLaunchParams();
+        this._launchParams = retrieveLaunchParams() as unknown as TelegramLaunchParams;
       } catch (error) {
         console.warn('Failed to retrieve launch params:', error);
       }
@@ -291,7 +296,7 @@ export class TelegramService {
   }
 
   // Get launch parameters
-  getLaunchParams() {
+  getLaunchParams(): TelegramLaunchParams | null {
     return this._launchParams;
   }
 }

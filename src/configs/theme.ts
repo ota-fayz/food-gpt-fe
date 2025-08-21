@@ -43,7 +43,7 @@ const defaultThemeOptions: ThemeOptions = {
 }
 
 // Create theme with Telegram support
-export const createAppTheme = (colorScheme: 'light' | 'dark' = 'light') => {
+export const createAppTheme = (colorScheme: 'light' | 'dark' = 'dark') => {
 	const telegramTheme = telegramService.theme
 
 	// If running in Telegram, use Telegram theme colors

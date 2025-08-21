@@ -2,7 +2,7 @@ import { ComponentType } from 'react'
 import { Navigate } from 'react-router-dom'
 import { STORAGE_KEYS } from '../constants/storage'
 import { ROUTER } from '../constants/router'
-import { useProfileQuery } from '../application/queries/useProfile'
+import { useProfileQuery } from '../hooks/useProfile'
 
 export function withAuthGate<P extends object>(Wrapped: ComponentType<P>): ComponentType<P> {
   const Guarded = (props: P) => {

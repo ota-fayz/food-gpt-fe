@@ -22,14 +22,12 @@ api.interceptors.response.use(
   (error) => {
     if (error?.response?.status === 401) {
       clearAuthToken()
-      try {
-        if (typeof window !== 'undefined') {
-          const current = new URL(window.location.href)
-          if (current.pathname !== ROUTER.WELCOME) {
-            window.location.replace(ROUTER.WELCOME)
-          }
+      if (typeof window !== 'undefined') {
+        const currentPathname = window.location.pathname
+        if (currentPathname !== ROUTER.WELCOME) {
+          window.location.replace(ROUTER.WELCOME)
         }
-      } catch {}
+      }
     }
     return Promise.reject(error)
   }
