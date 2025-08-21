@@ -8,11 +8,15 @@ import { type FormTypes } from './form.schema'
 import { STEPS } from './constants'
 import { ROUTER } from '../../../constants/router.ts'
 import { useTelegram } from '../../../hooks/useTelegram'
+import { useRegistration } from '../../../hooks/useRegistration'
+import { type RegistrationData } from '../../../types/profile'
 
 export const usePage = () => {
 	const [stepIndex, setStepIndex] = useState(0)
+	const [formData, setFormData] = useState<Partial<RegistrationData>>({})
 	const navigate = useNavigate()
 	const currentStep = STEPS[stepIndex]
+	const { register, isLoading, error } = useRegistration()
 	const { 
 		isWebApp, 
 		setMainButton, 
@@ -27,14 +31,27 @@ export const usePage = () => {
 	const form = useForm<FormTypes>({
 		resolver: zodResolver(currentStep.schema as ZodType<FormTypes>),
 		mode: 'onChange',
-		defaultValues: currentStep.defaultValues
+		defaultValues: {
+			...currentStep.defaultValues,
+			// Восстанавливаем данные из предыдущих шагов
+			...(formData as any)
+		}
 	})
+
+	// Обновляем форму при изменении шага
+	useEffect(() => {
+		form.reset({
+			...currentStep.defaultValues,
+			...(formData as any)
+		})
+	}, [stepIndex, formData, currentStep.defaultValues, form])
 
 	const handleBack = () => {
 		impactFeedback('light')
 		if (stepIndex === 0) {
 			navigate(ROUTER.WELCOME)
 		} else {
+			// При переходе назад не теряем данные
 			setStepIndex(stepIndex - 1)
 		}
 	}
@@ -45,9 +62,17 @@ export const usePage = () => {
 		
 		impactFeedback('medium')
 		
+		// Сохраняем данные текущего шага
+		const updatedFormData = { ...formData, ...data }
+		setFormData(updatedFormData)
+		
 		if (stepIndex === STEPS.length - 1) {
+			// На последнем шаге отправляем все данные на сервер
+			const finalData = updatedFormData as RegistrationData
+			console.log('Final registration data:', finalData)
+			
+			register(finalData)
 			notificationFeedback('success')
-			navigate(ROUTER.DASHBOARD)
 		} else {
 			setStepIndex(stepIndex + 1)
 		}
@@ -63,7 +88,7 @@ export const usePage = () => {
 			setMainButton({
 				text: stepIndex === STEPS.length - 1 ? 'Завершить' : 'Далее',
 				isVisible: true,
-				isActive: form.formState.isValid,
+				isActive: form.formState.isValid && !isLoading,
 				onClick: form.handleSubmit(onSubmit)
 			})
 
@@ -73,7 +98,7 @@ export const usePage = () => {
 				hideBackButton()
 			}
 		}
-	}, [isWebApp, stepIndex, form.formState.isValid, form.handleSubmit, onSubmit, handleBack, setMainButton, hideMainButton, setBackButton, hideBackButton])
+	}, [isWebApp, stepIndex, form.formState.isValid, isLoading, form.handleSubmit, onSubmit, handleBack, setMainButton, hideMainButton, setBackButton, hideBackButton])
 
 	const CurrentStep = STEPS[stepIndex].component
 	const progress = (stepIndex + 1) / STEPS.length * 100
@@ -85,6 +110,8 @@ export const usePage = () => {
 		onSubmit,
 		CurrentStep,
 		isWebApp,
-		user
+		user,
+		isLoading,
+		error
 	}
 }

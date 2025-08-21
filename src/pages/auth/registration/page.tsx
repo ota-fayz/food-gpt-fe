@@ -4,13 +4,14 @@ import IconButton from '@mui/material/IconButton'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
+import Alert from '@mui/material/Alert'
 import { FormProvider } from 'react-hook-form'
 
 import { Form, Wrapper } from './styles'
 import { usePage } from './usePage'
 
 const Registration = () => {
-	const {handleBack, onSubmit, CurrentStep, form, progress, isWebApp, user} = usePage()
+	const {handleBack, onSubmit, CurrentStep, form, progress, isWebApp, user, isLoading, error} = usePage()
 
 	return (
 		<FormProvider {...form}>
@@ -36,11 +37,24 @@ const Registration = () => {
 							</Stack>
 						</Box>
 					)}
+					
+					{/* Show error if registration failed */}
+					{error && (
+						<Alert severity="error">
+							Ошибка при регистрации. Попробуйте еще раз.
+						</Alert>
+					)}
+					
 					<CurrentStep />
 				</Stack>
 				{!isWebApp && (
-					<Button type="submit" disabled={!form.formState.isValid} variant="contained" size="large">
-						Далее
+					<Button 
+						type="submit" 
+						disabled={!form.formState.isValid || isLoading} 
+						variant="contained" 
+						size="large"
+					>
+						{isLoading ? 'Загрузка...' : 'Далее'}
 					</Button>
 				)}
 			</Form>

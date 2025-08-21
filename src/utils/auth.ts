@@ -12,4 +12,8 @@ export function clearAuthToken() {
   localStorage.removeItem(STORAGE_KEYS.AUTH_TOKEN)
 }
 
+export function setAuthToken(token: string) {
+  localStorage.setItem(STORAGE_KEYS.AUTH_TOKEN, token)
+}
+
 

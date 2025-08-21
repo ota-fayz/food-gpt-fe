@@ -5,10 +5,7 @@ import { Height } from './components/height'
 import { Weight } from './components/weight'
 import { Motivation } from './components/motivation'
 import { Target } from './components/target'
-import { Children } from './components/children'
-import { Diet } from './components/diet'
 import { Activity } from './components/activity'
-import { Duration } from './components/duration'
 import {
 	ageSchema,
 	genderSchema,
@@ -17,10 +14,7 @@ import {
 	weightSchema,
 	motivationSchema,
 	targetWeightSchema,
-	hasChildrenSchema,
-	dietSchema,
-	activitySchema,
-	trackingDurationSchema
+	activitySchema
 } from './form.schema'
 
 export const STEPS = [
@@ -74,31 +68,10 @@ export const STEPS = [
 		}
 	},
 	{
-		component: Children,
-		schema: hasChildrenSchema,
-		defaultValues: {
-			hasChildren: null
-		}
-	},
-	{
-		component: Diet,
-		schema: dietSchema,
-		defaultValues: {
-			diet: null
-		}
-	},
-	{
 		component: Activity,
 		schema: activitySchema,
 		defaultValues: {
 			activity: null
-		}
-	},
-	{
-		component: Duration,
-		schema: trackingDurationSchema,
-		defaultValues: {
-			trackingDuration: null
 		}
 	}
 ]

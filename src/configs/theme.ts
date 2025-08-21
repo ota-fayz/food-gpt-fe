@@ -2,6 +2,7 @@ import { createTheme, ThemeOptions } from '@mui/material'
 import { alpha } from '@mui/material/styles'
 import { blue, grey } from '@mui/material/colors'
 import { telegramService } from './telegram'
+import { type TelegramThemeParams } from '../types/telegram'
 
 // Default theme configuration
 const defaultThemeOptions: ThemeOptions = {
@@ -44,7 +45,7 @@ const defaultThemeOptions: ThemeOptions = {
 
 // Create theme with Telegram support
 export const createAppTheme = (colorScheme: 'light' | 'dark' = 'dark') => {
-	const telegramTheme = telegramService.theme
+	const telegramTheme = telegramService.theme as TelegramThemeParams
 
 	// If running in Telegram, use Telegram theme colors
 	if (telegramService.isWebApp && Object.keys(telegramTheme).length > 0) {

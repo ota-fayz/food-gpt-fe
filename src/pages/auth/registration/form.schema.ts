@@ -28,20 +28,8 @@ export const targetWeightSchema = z.object({
     targetWeight: z.preprocess(val => Number(val), z.number().min(30).max(250))
 })
 
-export const hasChildrenSchema = z.object({
-	hasChildren: z.enum(['YES', 'NO'])
-})
-
-export const dietSchema = z.object({
-	diet: z.enum(['NONE', 'PESCETARIAN', 'VEGETARIAN', 'VEGAN'])
-})
-
 export const activitySchema = z.object({
 	activity: z.enum(['LOW', 'MEDIUM', 'HIGH', 'VERY_HIGH'])
-})
-
-export const trackingDurationSchema = z.object({
-	trackingDuration: z.enum(['50', '30', '14', '7'])
 })
 
 export type GenderFormTypes = z.infer<typeof genderSchema>
@@ -51,10 +39,7 @@ export type HeightFormTypes = z.infer<typeof heightSchema>
 export type WeightFormTypes = z.infer<typeof weightSchema>
 export type MotivationFormTypes = z.infer<typeof motivationSchema>
 export type TargetWeightFormTypes = z.infer<typeof targetWeightSchema>
-export type HasChildrenFormTypes = z.infer<typeof hasChildrenSchema>
-export type DietFormTypes = z.infer<typeof dietSchema>
 export type ActivityFormTypes = z.infer<typeof activitySchema>
-export type TrackingDurationFormTypes = z.infer<typeof trackingDurationSchema>
 
 export type FormTypes =
 	| GenderFormTypes
@@ -64,7 +49,4 @@ export type FormTypes =
 	| WeightFormTypes
 	| MotivationFormTypes
 	| TargetWeightFormTypes
-	| HasChildrenFormTypes
-	| DietFormTypes
 	| ActivityFormTypes
-	| TrackingDurationFormTypes

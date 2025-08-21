@@ -123,19 +123,13 @@ export interface TelegramInitData {
 }
 
 export interface TelegramThemeParams {
-  bg_color?: string;
-  text_color?: string;
-  hint_color?: string;
-  link_color?: string;
-  button_color?: string;
-  button_text_color?: string;
-  secondary_bg_color?: string;
-  header_bg_color?: string;
-  accent_text_color?: string;
-  section_bg_color?: string;
-  section_header_text_color?: string;
-  subtitle_text_color?: string;
-  destructive_text_color?: string;
+  linkColor?: string;
+  buttonColor?: string;
+  buttonTextColor?: string;
+  bgColor?: string;
+  secondaryBgColor?: string;
+  textColor?: string;
+  hintColor?: string;
 }
 
 declare global {

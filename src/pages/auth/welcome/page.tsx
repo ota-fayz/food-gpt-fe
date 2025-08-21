@@ -31,17 +31,6 @@ const Welcome = () => {
 					>
 						Начать
 					</Button>
-					{import.meta.env.DEV && (
-						<Button
-							variant="outlined"
-							color="secondary"
-							size="small"
-							component={Link}
-							to={ROUTER.TELEGRAM_TEST}
-						>
-							Debug Telegram
-						</Button>
-					)}
 				</Stack>
 			</Wrapper>
 		</Container>

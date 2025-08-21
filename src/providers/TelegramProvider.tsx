@@ -3,7 +3,7 @@ import { ThemeProvider } from '@mui/material'
 import { telegramService } from '../configs/telegram'
 import { createAppTheme } from '../configs/theme'
 import { useTelegram } from '../hooks/useTelegram'
-import { authApi } from '../infrastructure/api/auth'
+import { authApi } from '../api/auth'
 import { getAuthToken, saveAuthToken } from '../utils/auth'
 import { ROUTER } from '../constants/router'
 
