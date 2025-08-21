@@ -11,6 +11,10 @@ const TelegramTest = lazy(async () => await import('../pages/telegram-test'))
 
 export const router = createBrowserRouter([
 	{
+		path: '/',
+		element: <Welcome />
+	},
+	{
 		path: ROUTER.REGISTRATION,
 		element: <Registration />
 	},
