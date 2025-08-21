@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { withGuestGate } from '../../../hoc/withGuestGate'
 
 import { Container, Wrapper } from './styles'
-import ImageSalad from '../../../assets/images/salad-with-macronutrients.png'
+import ImageSalad from '../../../assets/images/salad-with-macronutrients.webp'
 import { ROUTER } from '../../../constants/router.ts'
 
 const Welcome = () => {
