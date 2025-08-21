@@ -1,6 +1,7 @@
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import { Link } from 'react-router-dom'
+import { withGuestGate } from '../../../hoc/withGuestGate'
 
 import { Container, Wrapper } from './styles'
 import ImageSalad from '../../../assets/images/salad-with-macronutrients.png'
@@ -33,4 +34,4 @@ const Welcome = () => {
 	)
 }
 
-export default Welcome
+export default withGuestGate(Welcome)

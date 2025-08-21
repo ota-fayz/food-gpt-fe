@@ -3,6 +3,9 @@ import { ThemeProvider } from '@mui/material'
 import { telegramService } from '../configs/telegram'
 import { createAppTheme } from '../configs/theme'
 import { useTelegram } from '../hooks/useTelegram'
+import { authApi } from '../infrastructure/api/auth'
+import { getAuthToken, saveAuthToken } from '../utils/auth'
+import { ROUTER } from '../constants/router'
 
 interface TelegramContextValue {
   isInitialized: boolean
@@ -50,6 +53,31 @@ export const TelegramProvider = ({ children }: TelegramProviderProps) => {
         window.removeEventListener('resize', handleViewportChange)
       }
     }
+  }, [isInitialized])
+
+  // Telegram auth: exchange initData for token once after init
+  useEffect(() => {
+    const runTelegramAuth = async () => {
+      try {
+        if (!isInitialized || !telegramService.isWebApp) return
+        if (getAuthToken()) return
+        const initData = window.Telegram?.WebApp?.initData || ''
+        if (!initData) return
+        const res = await authApi.loginWithTelegram(initData)
+        if (res?.token) {
+          saveAuthToken(res.token)
+          try {
+            if (typeof window !== 'undefined') {
+              window.location.replace(ROUTER.DASHBOARD)
+            }
+          } catch {}
+        }
+      } catch (e) {
+        // silent; user stays guest until retry
+        console.warn('Telegram auth failed', e)
+      }
+    }
+    runTelegramAuth()
   }, [isInitialized])
 
   const contextValue: TelegramContextValue = {

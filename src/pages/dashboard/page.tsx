@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { withAuthGate } from "../../hoc/withAuthGate";
 import { useTheme } from "@mui/material/styles";
 
 import { Dates } from "./components/dates";
@@ -187,4 +188,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default withAuthGate(Dashboard);
