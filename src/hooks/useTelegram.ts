@@ -1,12 +1,12 @@
 import { useEffect, useState, useCallback } from 'react';
 import { telegramService } from '../configs/telegram';
-import type { TelegramUser } from '../types/telegram';
+import type { TelegramUser, TelegramThemeParams } from '../types/telegram';
 
 export interface UseTelegramReturn {
   isWebApp: boolean;
   user: TelegramUser | null;
   colorScheme: 'light' | 'dark';
-  theme: Record<string, any>;
+  theme: TelegramThemeParams | {};
   isInitialized: boolean;
   setMainButton: (params: {
     text: string;
@@ -32,7 +32,7 @@ export interface UseTelegramReturn {
 export const useTelegram = (): UseTelegramReturn => {
   const [isInitialized, setIsInitialized] = useState(false);
   const [colorScheme, setColorScheme] = useState<'light' | 'dark'>('light');
-  const [theme, setTheme] = useState<Record<string, any>>({});
+  const [theme, setTheme] = useState<TelegramThemeParams | {}>({});
   const [user, setUser] = useState<TelegramUser | null>(null);
 
   useEffect(() => {

@@ -36,7 +36,7 @@ import {
   isPopupSupported,
 } from '@telegram-apps/sdk';
 
-import type { TelegramWebApp, TelegramUser, TelegramInitData } from '../types/telegram';
+import type { TelegramWebApp, TelegramUser, TelegramInitData, TelegramThemeParams } from '../types/telegram';
 
 // Narrow type for launch params to avoid using any
 interface TelegramLaunchParams {
@@ -135,7 +135,7 @@ export class TelegramService {
     return isThemeParamsDark() ? 'dark' : 'light';
   }
 
-  get theme() {
+  get theme(): TelegramThemeParams | {} {
     if (!this.isInitialized || !isThemeParamsMounted()) {
       return {};
     }
