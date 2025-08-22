@@ -135,7 +135,7 @@ export class TelegramService {
     return isThemeParamsDark() ? 'dark' : 'light';
   }
 
-  get theme(): TelegramThemeParams | {} {
+  get theme(): TelegramThemeParams | Record<string, never> {
     if (!this.isInitialized || !isThemeParamsMounted()) {
       return {};
     }

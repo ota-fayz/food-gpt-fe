@@ -34,7 +34,7 @@ export const usePage = () => {
 		defaultValues: {
 			...currentStep.defaultValues,
 			// Восстанавливаем данные из предыдущих шагов
-			...(formData as any)
+			...(formData as Partial<FormTypes>)
 		}
 	})
 
@@ -42,9 +42,9 @@ export const usePage = () => {
 	useEffect(() => {
 		form.reset({
 			...currentStep.defaultValues,
-			...(formData as any)
+			...(formData as Partial<FormTypes>)
 		})
-	}, [stepIndex, formData, currentStep.defaultValues, form])
+	}, [stepIndex, formData, currentStep.defaultValues, form.reset])
 
 	const handleBack = () => {
 		impactFeedback('light')

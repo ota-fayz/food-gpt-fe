@@ -6,7 +6,7 @@ export interface UseTelegramReturn {
   isWebApp: boolean;
   user: TelegramUser | null;
   colorScheme: 'light' | 'dark';
-  theme: TelegramThemeParams | {};
+  theme: TelegramThemeParams | Record<string, never>;
   isInitialized: boolean;
   setMainButton: (params: {
     text: string;
@@ -32,7 +32,7 @@ export interface UseTelegramReturn {
 export const useTelegram = (): UseTelegramReturn => {
   const [isInitialized, setIsInitialized] = useState(false);
   const [colorScheme, setColorScheme] = useState<'light' | 'dark'>('light');
-  const [theme, setTheme] = useState<TelegramThemeParams | {}>({});
+  const [theme, setTheme] = useState<TelegramThemeParams | Record<string, never>>({});
   const [user, setUser] = useState<TelegramUser | null>(null);
 
   useEffect(() => {

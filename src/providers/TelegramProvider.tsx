@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useContext, useEffect, useState } from 'react'
+import { ReactNode, createContext, useEffect, useState } from 'react'
 import { ThemeProvider } from '@mui/material'
 import { telegramService } from '../configs/telegram'
 import { createAppTheme } from '../configs/theme'
@@ -12,7 +12,7 @@ interface TelegramContextValue {
   colorScheme: 'light' | 'dark'
 }
 
-const TelegramContext = createContext<TelegramContextValue>({
+export const TelegramContext = createContext<TelegramContextValue>({
   isInitialized: false,
   colorScheme: 'light'
 })
@@ -70,7 +70,9 @@ export const TelegramProvider = ({ children }: TelegramProviderProps) => {
             if (typeof window !== 'undefined') {
               window.location.replace(ROUTER.DASHBOARD)
             }
-          } catch {}
+          } catch {
+            // Silent catch for navigation errors
+          }
         }
       } catch (e) {
         // silent; user stays guest until retry
@@ -94,10 +96,4 @@ export const TelegramProvider = ({ children }: TelegramProviderProps) => {
   )
 }
 
-export const useTelegramContext = () => {
-  const context = useContext(TelegramContext)
-  if (!context) {
-    throw new Error('useTelegramContext must be used within a TelegramProvider')
-  }
-  return context
-}
+// Hook moved to separate file: useTelegramContext.ts
