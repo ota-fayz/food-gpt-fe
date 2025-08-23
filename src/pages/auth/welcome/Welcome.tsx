@@ -102,6 +102,36 @@ export const Welcome = () => {
 				>
 					🔍 Диагностика Telegram
 				</Button>
+
+				{/* Кнопка для получения данных из URL */}
+				<Button
+					variant="contained"
+					color="success"
+					size="small"
+					onClick={() => {
+						// Получаем данные из URL
+						const urlParams = new URLSearchParams(window.location.search);
+						const tgWebAppData = urlParams.get('tgWebAppData');
+						
+						if (tgWebAppData) {
+							// Декодируем URL
+							const decodedData = decodeURIComponent(tgWebAppData);
+							setTelegramData(decodedData);
+							
+							alert(`✅ Данные получены из URL!\n\ninit_data для Postman:\n${decodedData}`);
+							
+							// Копируем в буфер обмена
+							if (navigator.clipboard) {
+								navigator.clipboard.writeText(decodedData);
+							}
+						} else {
+							alert('❌ tgWebAppData не найден в URL');
+						}
+					}}
+					sx={{ mb: 2 }}
+				>
+					📋 Получить из URL
+				</Button>
 			</Wrapper>
 		</Container>
 	)
