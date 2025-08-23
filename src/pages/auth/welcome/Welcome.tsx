@@ -13,7 +13,7 @@ export const Welcome = () => {
 			<img className="img" src={ImageSalad} alt="Salad with macronutrients" />
 			<Wrapper>
 				<Typography variant="h5" component="h1">
-					Легкий подсчет калорий с AI (CD Test)
+					Легкий подсчет калорий с AI
 				</Typography>
 				<Typography variant="body1">
 					Просто сделайте фото своего блюда, а AI сделает всё остальное
