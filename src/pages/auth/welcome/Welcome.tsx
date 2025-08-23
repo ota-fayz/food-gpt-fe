@@ -69,6 +69,39 @@ export const Welcome = () => {
 				>
 					🚀 Получить init_data
 				</Button>
+
+				{/* Кнопка для полной диагностики */}
+				<Button
+					variant="outlined"
+					color="error"
+					size="small"
+					onClick={() => {
+						let info = '=== ДИАГНОСТИКА TELEGRAM ===\n\n';
+						
+						info += `window.Telegram: ${window.Telegram ? 'ЕСТЬ' : 'НЕТ'}\n`;
+						info += `window.Telegram?.WebApp: ${window.Telegram?.WebApp ? 'ЕСТЬ' : 'НЕТ'}\n`;
+						info += `window.Telegram?.WebApp?.initData: ${window.Telegram?.WebApp?.initData ? 'ЕСТЬ' : 'НЕТ'}\n\n`;
+						
+						if (window.Telegram?.WebApp?.initData) {
+							info += `initData: ${window.Telegram.WebApp.initData}\n\n`;
+						}
+						
+						info += `URL: ${window.location.href}\n`;
+						info += `User Agent: ${navigator.userAgent.substring(0, 100)}...\n`;
+						
+						// Проверяем URL параметры
+						const urlParams = new URLSearchParams(window.location.search);
+						const tgWebAppData = urlParams.get('tgWebAppData');
+						if (tgWebAppData) {
+							info += `\ntgWebAppData в URL: ${tgWebAppData}`;
+						}
+						
+						alert(info);
+					}}
+					sx={{ mb: 2 }}
+				>
+					🔍 Диагностика Telegram
+				</Button>
 			</Wrapper>
 		</Container>
 	)
