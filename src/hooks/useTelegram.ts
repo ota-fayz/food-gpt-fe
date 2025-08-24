@@ -8,6 +8,7 @@ export interface UseTelegramReturn {
   colorScheme: 'light' | 'dark';
   theme: TelegramThemeParams | Record<string, never>;
   isInitialized: boolean;
+  rawInitData: string | null;
   setMainButton: (params: {
     text: string;
     isVisible?: boolean;
@@ -114,6 +115,7 @@ export const useTelegram = (): UseTelegramReturn => {
     colorScheme,
     theme,
     isInitialized,
+    rawInitData: telegramService.getRawInitData(),
     setMainButton,
     hideMainButton,
     showMainButton,

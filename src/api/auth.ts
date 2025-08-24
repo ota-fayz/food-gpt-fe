@@ -7,13 +7,17 @@ export interface TelegramAuthResponse {
 }
 
 export const authApi = {
-  loginWithTelegram: async (initData: string): Promise<TelegramAuthResponse> => {
-    const { data } = await api.post('/api/v1/auth/telegram', { init_data: initData })
+  loginWithTelegram: async (): Promise<TelegramAuthResponse> => {
+    console.log('🚀 Starting Telegram login process...')
+    const { data } = await api.post('/api/v1/auth/telegram')
+    console.log('✅ Telegram login successful:', data)
     return data
   },
   
   register: async (registrationData: RegistrationData): Promise<RegistrationResponse> => {
+    console.log('📝 Starting registration process...', registrationData)
     const { data } = await api.post('/api/v1/auth/register', registrationData)
+    console.log('✅ Registration successful:', data)
     return data
   }
 }

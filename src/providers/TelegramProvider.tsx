@@ -61,11 +61,19 @@ export const TelegramProvider = ({ children }: TelegramProviderProps) => {
       try {
         if (!isInitialized || !telegramService.isWebApp) return
         if (getAuthToken()) return
-        const initData = window.Telegram?.WebApp?.initData || ''
-        if (!initData) return
-        const res = await authApi.loginWithTelegram(initData)
+        
+        // Get raw init data from Telegram service
+        const rawInitData = telegramService.getRawInitData()
+        if (!rawInitData) {
+          console.log('⚠️ No raw init data available for auth')
+          return
+        }
+        
+        console.log('🚀 Starting Telegram auth in provider...')
+        const res = await authApi.loginWithTelegram()
         if (res?.token) {
           saveAuthToken(res.token)
+          console.log('✅ Telegram auth successful, redirecting to dashboard')
           try {
             if (typeof window !== 'undefined') {
               window.location.replace(ROUTER.DASHBOARD)

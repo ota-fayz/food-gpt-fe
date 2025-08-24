@@ -2,22 +2,19 @@ import {
   init,
   isTMA,
   retrieveLaunchParams,
+  retrieveRawInitData,
   // Components
-  mountMiniApp,
   closeMiniApp,
   miniAppReady,
   // Theme params
-  mountThemeParams,
   themeParamsState,
   isThemeParamsDark,
   isThemeParamsMounted,
   // Main button
-  mountMainButton,
   onMainButtonClick,
   setMainButtonParams,
   isMainButtonMounted,
   // Back button
-  mountBackButton,
   onBackButtonClick,
   showBackButton,
   hideBackButton as hideBackButtonInternal,
@@ -48,6 +45,7 @@ export class TelegramService {
   private isInitialized = false;
   private _user: TelegramUser | null = null;
   private _launchParams: TelegramLaunchParams | null = null;
+  private _rawInitData: string | null = null;
 
   static getInstance(): TelegramService {
     if (!TelegramService.instance) {
@@ -57,14 +55,19 @@ export class TelegramService {
   }
 
   async initialize(): Promise<void> {
-    if (this.isInitialized) return;
+    if (this.isInitialized) {
+      console.log('ℹ️ Telegram service already initialized');
+      return;
+    }
 
     try {
       // Check if we're in Telegram environment
       if (!isTMA()) {
-        console.log('Not running in Telegram environment');
+        console.log('⚠️ Not running in Telegram environment - skipping initialization');
         return;
       }
+
+      console.log('🚀 Initializing Telegram service...');
 
       // Initialize the SDK
       init({
@@ -74,35 +77,28 @@ export class TelegramService {
       // Get launch parameters
       try {
         this._launchParams = retrieveLaunchParams() as unknown as TelegramLaunchParams;
+        console.log('✅ Telegram launch params retrieved successfully:', this._launchParams);
       } catch (error) {
         console.warn('Failed to retrieve launch params:', error);
       }
 
-      // Initialize components that are available
+      // Get raw init data for authorization
       try {
-        mountMiniApp();
-        miniAppReady();
+        const rawInitData = retrieveRawInitData();
+        this._rawInitData = rawInitData || null;
+        console.log('✅ Telegram raw init data retrieved successfully:', this._rawInitData);
       } catch (error) {
-        console.warn('Failed to mount mini app:', error);
+        console.warn('Failed to retrieve raw init data:', error);
       }
-      
-      try {
-        mountThemeParams();
-      } catch (error) {
-        console.warn('Failed to mount theme params:', error);
-      }
-      
-      try {
-        mountMainButton();
-      } catch (error) {
-        console.warn('Failed to mount main button:', error);
-      }
-      
-      try {
-        mountBackButton();
-      } catch (error) {
-        console.warn('Failed to mount back button:', error);
-      }
+
+      // Initialize the SDK. This should mount all available components.
+      init();
+      console.log('✅ Telegram SDK initialized. All available components should be mounted.');
+
+      // We no longer need explicit mount calls here, as init() handles it.
+      // We can still call miniAppReady() if it's a separate action.
+      miniAppReady();
+      console.log('✅ Mini app ready signal sent.');
 
       // Extract user data from launch params
       if (this._launchParams?.initData?.user) {
@@ -298,6 +294,11 @@ export class TelegramService {
   // Get launch parameters
   getLaunchParams(): TelegramLaunchParams | null {
     return this._launchParams;
+  }
+
+  // Get raw init data for authorization
+  getRawInitData(): string | null {
+    return this._rawInitData;
   }
 }
 
