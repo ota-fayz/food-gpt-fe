@@ -4,8 +4,30 @@ import { ROUTER } from '../constants/router'
 import { clearAuthToken } from '../utils/auth'
 import { telegramService } from './telegram'
 
+// Determine API URL based on environment
+const getApiUrl = () => {
+  // If VITE_API_URL is set, use it
+  if (import.meta.env.VITE_API_URL) {
+    console.log('🌐 Using VITE_API_URL:', import.meta.env.VITE_API_URL);
+    return import.meta.env.VITE_API_URL;
+  }
+  
+  // In production, use a default API URL
+  if (import.meta.env.PROD) {
+    // You should replace this with your actual production API URL
+    const prodUrl = 'https://api.food-gpt.com'; // TODO: Replace with actual API URL
+    console.log('🌐 Using production API URL:', prodUrl);
+    return prodUrl;
+  }
+  
+  // In development, use localhost
+  const devUrl = 'http://localhost:8080';
+  console.log('🌐 Using development API URL:', devUrl);
+  return devUrl;
+};
+
 export const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8080',
+  baseURL: getApiUrl(),
   timeout: 15000
 })
 
@@ -35,6 +57,14 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
+    console.error('❌ API Error:', {
+      url: error.config?.url,
+      method: error.config?.method,
+      status: error.response?.status,
+      message: error.message,
+      isNetworkError: !error.response
+    });
+
     if (error?.response?.status === 401) {
       clearAuthToken()
       if (typeof window !== 'undefined') {
